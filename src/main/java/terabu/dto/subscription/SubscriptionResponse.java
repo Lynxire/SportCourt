@@ -1,17 +1,12 @@
-package terabu.entity;
+package terabu.dto.subscription;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name = "subscription")
-public class Subscription {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SubscriptionResponse {
     private Long id;
     private String name;
 
@@ -24,9 +19,7 @@ public class Subscription {
     private LocalDate endDate;
     private Long price;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Long customer_id;
 
     public Long getId() {
         return id;
@@ -68,12 +61,12 @@ public class Subscription {
         this.price = price;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomer_id() {
+        return customer_id;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer_id(Long customer_id) {
+        this.customer_id = customer_id;
     }
 
     @Override
@@ -81,8 +74,8 @@ public class Subscription {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Subscription that = (Subscription) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(price, that.price) && Objects.equals(customer, that.customer);
+        SubscriptionResponse that = (SubscriptionResponse) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(price, that.price) && Objects.equals(customer_id, that.customer_id);
     }
 
     @Override
@@ -92,19 +85,19 @@ public class Subscription {
         result = 31 * result + Objects.hashCode(startDate);
         result = 31 * result + Objects.hashCode(endDate);
         result = 31 * result + Objects.hashCode(price);
-        result = 31 * result + Objects.hashCode(customer);
+        result = 31 * result + Objects.hashCode(customer_id);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Subscription{" +
+        return "SubscriptionResponse{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", price=" + price +
-                ", customer=" + customer +
+                ", customer_id=" + customer_id +
                 '}';
     }
 }
