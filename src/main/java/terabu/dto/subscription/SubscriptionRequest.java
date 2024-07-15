@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class SubscriptionRequest {
+    private Long id;
     private String name;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -19,7 +20,15 @@ public class SubscriptionRequest {
     private LocalDate endDate;
     private Long price;
 
-    private Long customer_id;
+    private Long customerId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -53,12 +62,12 @@ public class SubscriptionRequest {
         this.price = price;
     }
 
-    public Long getCustomer_id() {
-        return customer_id;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(Long customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     @Override
@@ -67,27 +76,29 @@ public class SubscriptionRequest {
         if (o == null || getClass() != o.getClass()) return false;
 
         SubscriptionRequest that = (SubscriptionRequest) o;
-        return Objects.equals(name, that.name) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(price, that.price) && Objects.equals(customer_id, that.customer_id);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(price, that.price) && Objects.equals(customerId, that.customerId);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(name);
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(name);
         result = 31 * result + Objects.hashCode(startDate);
         result = 31 * result + Objects.hashCode(endDate);
         result = 31 * result + Objects.hashCode(price);
-        result = 31 * result + Objects.hashCode(customer_id);
+        result = 31 * result + Objects.hashCode(customerId);
         return result;
     }
 
     @Override
     public String toString() {
         return "SubscriptionRequest{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", price=" + price +
-                ", customer_id=" + customer_id +
+                ", customerId=" + customerId +
                 '}';
     }
 }
