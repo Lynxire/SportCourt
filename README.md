@@ -43,6 +43,10 @@
 
 Создать базу данных с названием **"sport"** в Posgresql
 
+```sql
+CREATE DATABASE sport;
+```
+
 Открыть проект в **"IDEA"**
 
 Запустить проект в **IDEA** через класс ``Main.class``
