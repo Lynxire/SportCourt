@@ -1,27 +1,11 @@
-package terabu.entity;
-
-import jakarta.persistence.*;
+package terabu.dto.customer;
 
 import java.util.Objects;
 
-@Entity
-@Table(name = "customer")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CustomerRequest {
     private String firstName;
     private String lastName;
     private String email;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -52,14 +36,13 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(email, customer.email);
+        CustomerRequest that = (CustomerRequest) o;
+        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(firstName);
+        int result = Objects.hashCode(firstName);
         result = 31 * result + Objects.hashCode(lastName);
         result = 31 * result + Objects.hashCode(email);
         return result;
@@ -67,9 +50,8 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+        return "CustomerRequest{" +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';

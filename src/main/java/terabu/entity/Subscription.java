@@ -3,8 +3,6 @@ package terabu.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,10 +16,9 @@ public class Subscription {
     private LocalDate endDate;
     private Long price;
 
-
-    @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "customers_id")
-    private List<Customer> comments=new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public Long getId() {
         return id;
@@ -63,13 +60,21 @@ public class Subscription {
         this.price = price;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Subscription that = (Subscription) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(price, that.price);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(price, that.price) && Objects.equals(customer, that.customer);
     }
 
     @Override
@@ -79,6 +84,7 @@ public class Subscription {
         result = 31 * result + Objects.hashCode(startDate);
         result = 31 * result + Objects.hashCode(endDate);
         result = 31 * result + Objects.hashCode(price);
+        result = 31 * result + Objects.hashCode(customer);
         return result;
     }
 
@@ -90,6 +96,7 @@ public class Subscription {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", price=" + price +
+                ", customer=" + customer +
                 '}';
     }
 }

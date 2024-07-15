@@ -1,19 +1,12 @@
-package terabu.entity;
-
-import jakarta.persistence.*;
+package terabu.dto.customer;
 
 import java.util.Objects;
 
-@Entity
-@Table(name = "customer")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerResponse {
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-
 
     public Long getId() {
         return id;
@@ -52,8 +45,8 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(email, customer.email);
+        CustomerResponse that = (CustomerResponse) o;
+        return Objects.equals(id, that.id) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email);
     }
 
     @Override
@@ -67,7 +60,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerResponse{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
