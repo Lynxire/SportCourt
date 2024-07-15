@@ -35,19 +35,21 @@
 
 ## Run Locally
 
+Клонировать проект
+
+```bash
+  git clone https://github.com/Lynxire/SportCourt.git
+```
+
 Создать базу данных с названием **"sport"** в Posgresql
 
 ```sql
 CREATE DATABASE sport;
 ```
 
-Установить данные для подключения к БД: ```username = postgres, password = 1111``` (или изменить в application.properties на своим данные)
+Установить данные для подключения к БД: ```username = postgres, password = 1111```
 
-Клонировать проект
 
-```bash
-  git clone https://github.com/Lynxire/SportCourt.git
-```
 
 Открыть проект в **"IDEA"**
 
