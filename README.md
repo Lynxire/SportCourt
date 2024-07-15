@@ -23,7 +23,7 @@
 Техническое задание описано в файле "Техническое задание.pdf"
 
 #### Где скачать файл для импорта коллекции запросов в Postman?
-
+Файл для импорта называется **"SportCourt.postman_collection.json"**
 
 #### Что за переменные в файле application.properties (DB_PASSWORD, DB_USERNAME, DB_HOST)?
 Данные переменные можно использовать для Docker, для описания к примеру в docker-compose
