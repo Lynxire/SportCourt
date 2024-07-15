@@ -33,19 +33,27 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subscription = subscriptionMapper.toEntity(subscriptionRequest);
         Customer customer = customerRepository.findById(subscriptionRequest.getCustomerId()).orElseThrow(() -> new RuntimeException("Customer not found"));
         subscription.setCustomer(customer);
-        return subscriptionMapper.toResponse(subscriptionRepository.save(subscription));
+        SubscriptionResponse response = subscriptionMapper.toResponse(subscriptionRepository.save(subscription));
+        response.setCustomerId(subscriptionRequest.getCustomerId());
+        return response;
     }
 
     @Override
     public SubscriptionResponse findById(Long id) {
         Subscription subscription = subscriptionRepository.findById(id).orElseThrow(() -> new RuntimeException("Subscription not found"));
-        return subscriptionMapper.toResponse(subscription);
+        SubscriptionResponse response = subscriptionMapper.toResponse(subscription);
+        response.setCustomerId(subscription.getCustomer().getId());
+        return response;
 
     }
 
     @Override
     public List<SubscriptionResponse> getAll() {
-        return subscriptionRepository.findAll().stream().map(subscriptionMapper::toResponse).toList();
+        return subscriptionRepository.findAll().stream().map(subscription -> {
+            SubscriptionResponse response = subscriptionMapper.toResponse(subscription);
+            response.setCustomerId(subscription.getCustomer().getId());
+            return response;
+        }).toList();
     }
 
     @Override
@@ -62,6 +70,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setEndDate(subscriptionRequest.getEndDate());
         subscription.setPrice(subscription.getPrice());
         subscription.setName(subscriptionRequest.getName());
-        return subscriptionMapper.toResponse(subscriptionRepository.save(subscription));
+        SubscriptionResponse response = subscriptionMapper.toResponse(subscriptionRepository.save(subscription));
+        response.setCustomerId(subscriptionRequest.getCustomerId());
+        return response;
     }
 }

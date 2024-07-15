@@ -26,7 +26,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/findById")
-    public SubscriptionResponse findById(@RequestParam Long id) {
+    public SubscriptionResponse findById(@RequestParam("id") Long id) {
         return subscriptionService.findById(id);
 
     }
@@ -37,7 +37,7 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable("id") Long id) {
         subscriptionService.delete(id);
     }
 
